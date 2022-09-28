@@ -18,69 +18,54 @@
 // validating input
 // Determining computer choice
 
-
-
-
 // initialize counters
-
 var wins = 0;
 var losses = 0;
 var ties = 0;
 
-// expected range is 0,1,2
-
-console.log(Math.floor(Math.random() * 3));
-
-console.log(generateComputerChoice());
 // Ask the user at least once for their valid input
 
 
 // create a function that compares the values stored for user choice and computer choice
 
-function evaluator(user,computer){
-    if (user == computer){
-        console.log("It's a tie");
-        ties = ties + 1;
-    }
-    else if ((user == "R" && computer == "S" ) || (user == "S" && computer == "P" ) || (user == "P" && computer == "R" )){
-        console.log("User Wins");
-        wins = wins +1;
-    }else {
-        console.log("Computer Wins");
-        losses = losses + 1;
-    }
-}
 
-console.log(evaluator("R","S"));
 
-do {
-    var userInput = prompt("Please enter R, P, or S to play Rock Paper Scissors.");
-    userInput = parseUserInput(userInput);
-} while (!userInput)
+// console.log(evaluator("R","S"));
 
-confirm("Wins: " + wins + "\n Loses: " + losses + "\nTies: " + ties)
+// do {
+//     var userInput = prompt("Please enter R, P, or S to play Rock Paper Scissors.");
+//     userInput = parseUserInput(userInput);
+// } while (!userInput)
+
+// confirm("Wins: " + wins + "\n Loses: " + losses + "\nTies: " + ties)
 
 function playAgain (){
     do {
         var userInput = prompt("Please enter R, P, or S to play Rock Paper Scissors.");
         userInput = parseUserInput(userInput);
     } while (!userInput);
-    prompt("Wins: " + wins + "\n Loses: " + losses + "\nTies: " + ties);
+    var userInputCounter = userInput;
+    var computerScienceCounter = generateComputerChoice();
+    evaluator(userInputCounter, computerScienceCounter);
+    alert("Wins: " + wins + "\n Loses: " + losses + "\nTies: " + ties);
     if (confirm("Do you want to play again?")){
      playAgain();
    }
     
 }
 
+playAgain();
+
 // Store userInput into variable for counter
 
-var userInputCounter = userInput;
+
 
 //Generate computer choice
 
 // generate number values for RPS, then randomly choose one of the numbers, and assign the resulting choice to a variable
 
 function generateComputerChoice (){
+    // expected range is 0,1,2
     var computerChoice = Math.floor(Math.random() * 3);
     if (computerChoice == 0){
         return "R";
@@ -90,9 +75,24 @@ function generateComputerChoice (){
     }
    else {
         return  "P";
-}}
+    }
+}
 
 
+function evaluator(user,computer){
+    if (user == computer){
+
+        alert("The computer chose " + computer  + ". It's a tie");
+        ties = ties + 1;
+    }
+    else if ((user == "R" && computer == "S" ) || (user == "S" && computer == "P" ) || (user == "P" && computer == "R" )){
+        alert("The computer chose " + computer  + ". User Wins");
+        wins = wins +1;
+    }else {
+        alert("The computer chose " + computer  + ". Computer Wins");
+        losses = losses + 1;
+    }
+}
 
 
 function parseUserInput (userInput) {
@@ -103,15 +103,15 @@ function parseUserInput (userInput) {
     if(userInput == "R" || userInput == "ROCK")
     {
         //Sanitizing valid input
-        return "Rock";
+        return "R";
     }
     else if(userInput == "P" || userInput == "PAPER")
     {
-        return "Paper";
+        return "P";
     }
     else if (userInput == "S" || userInput =="SCISSOR")
     {
-        return "Scissor";
+        return "S";
     }
     else
         return false;
